@@ -1,93 +1,36 @@
-<?php
-
-$start = "http://localhost/webCrawler/test.html";
-
-$already_crawled = [];
-$crawling = [];
-
-function get_datails($url) {
-
-     $options = ['http'=>[
-          'method'=>"GET",
-          'headers'=>"User-Agent: MilciBot/0.1\n"
-          ]];
-
-     $context = stream_context_create($options);
-
-     $doc = new DOMDocument();
-     @$doc->loadHTML(@file_get_contents($url, false, $context));
-
-     $title = $doc->getElementsByTagName("title");
-     $title = $title->item(0)->nodeValue;
-
-     $description = "";
-     $keywords = "";
-     $metas = $doc->getElementsByTagName("meta");
-     for ($i = 0; $i < $metas->length; $i++) {
-          $meta = $metas->item($i);
-
-          if ($meta->getAttribute("name") == strtolower("description")) {
-               $description = $meta->getAttribute("content");
-          }
-          if ($meta->getAttribute("name") == strtolower("keywords")) {
-               $keywords = $meta->getAttribute("content");
-          }
-     }
-
-     return '{ "Title": "' . $title . '", "Description": "' . str_replace("\n", "", $description) . '", "Keywords": "' . $keywords . '", "URL: " "' . $url . '"}';
-
-}
-
-function follow_links($url) {
-
-     global $already_crawled;
-     global $crawling;
-
-     $options = ['http'=>[
-          'method'=>"GET",
-          'headers'=>"User-Agent: MilciBot/0.1\n"
-          ]];
-
-     $context = stream_context_create($options);
-
-     $doc = new DOMDocument();
-     @$doc->loadHTML(@file_get_contents($url, false, $context));
-
-     $linklist = $doc->getElementsByTagName("a");
-
-     foreach ($linklist as $link) {
-          $l = $link->getAttribute("href");
-
-          if (substr($l, 0, 1) == "/" && substr($l, 0, 2) != "//") {
-               $l = parse_url($url)["scheme"] . "://" . parse_url($url)["host"] . $l;
-          }else if (substr($l, 0, 2) == "//") {
-               $l = parse_url($url)["scheme"] . ":" . $l;
-          }else if (substr($l, 0, 2) == "./") {
-               $l = parse_url($url)["scheme"] . "://" . parse_url($url)["host"] . dirname(parse_url($url)["path"]) . substr($l, 1);
-          }else if (substr($l, 0, 1) == "#") {
-               $l = parse_url($url)["scheme"] . "://" . parse_url($url)["host"] . parse_url($url)["path"] . $l;
-          }else if (substr($l, 0, 3) == "../") {
-               $l = parse_url($url)["scheme"] . "://" . parse_url($url)["host"] . "/" . $l;
-          }else if (substr($l, 0, 11) == "javascript:") {
-               continue;
-          }else if (substr($l, 0, 5) != "https" && substr($l, 0, 4) != "http") {
-               $l = parse_url($url)["scheme"] . "://" . parse_url($url)["host"] . "/" . $l;
-          }
-
-          if (!in_array($l, $already_crawled)) {
-               $already_crawled[] = $l;
-               $crawling[] = $l;
-               echo get_datails($l) . "\n";
-          }
-
-     }
-
-     array_shift($crawling);
-     foreach($crawling as $site) {
-          follow_links($site);
-     }
-
-}
-
-follow_links($start);
-print_r($already_crawled);
+<?php $bgRandNumber = rand(1, 4); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>suggle search</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:400,600|Fira+Sans:400,600,800|Shrikhand" rel="stylesheet">
+     <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+     <div id="searchEngine">
+          <div class="search-engine-wrapper">
+               <div class="search-engine-logo">
+                    <h1>Suggle</h1>
+               </div>
+               <div class="search-engine-form">
+                    <form action="search.php" method="get">
+                         <input type="search" name="q" placeholder="Search suggle...">
+                    </form>
+                    <ul class="links">
+                         <li><a href="https://www.google.com"><i class="fa fa-google"></i></a></li>
+                         <li><a href="https://www.youtube.com"><i class="fa fa-youtube-play"></i></a></li>
+                         <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+                         <li><a href="https://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+                         <li><a href="https://www.twitch.com"><i class="fa fa-twitch"></i></a></li>
+                         <li><a href="https://www.trello.com"><i class="fa fa-trello"></i></a></li>
+                         <li><a href="https://www.github.com"><i class="fa fa-github"></i></a></li>
+                    </ul>
+               </div>
+          </div>
+     </div>
+</body>
+</html>

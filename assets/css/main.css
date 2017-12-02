@@ -1,0 +1,229 @@
+:root {
+     --page-background-color: #f3f3f3;
+
+     --sugle-color: #F53435;
+     --sugle-color-2: #b51f56;
+     --sugle-color-3: #86415E;
+     --sugle-color-4: #3280e8;
+     --sugle-color-5: #f048d0;
+}
+
+body {
+     margin: 0;
+     font-family: 'Barlow Semi Condensed', sans-serif;
+     background: var(--page-background-color);
+}
+a {color: var(--sugle-color-5); text-decoration: none;}
+
+.search-engine-wrapper {
+     width: 100vw;
+     height: 100vh;
+     background: #fff;
+     z-index: 1000;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+}
+
+.search-engine-wrapper > .search-engine-logo {
+     width: 100vw;
+     text-align: center;
+     margin-top: -100px;
+}
+
+@media screen and (max-height: 750px) {
+     .search-engine-wrapper > .search-engine-logo {
+          margin: 0px;
+     }
+}
+
+.search-engine-wrapper > .search-engine-logo > h1 {
+     font-family: 'Shrikhand', sans-serif;
+     font-weight: 300;
+     font-size: 125px;
+     margin: 0;
+     color: var(--sugle-color-4);
+}
+
+@media screen and (min-width: 1215px) {
+     .search-engine-wrapper > .search-engine-logo > h1 {
+          font-size: 145px;
+     }
+}
+
+@media screen and (max-width: 415px) {
+     .search-engine-wrapper > .search-engine-logo > h1 {
+          font-size: 110px;
+     }
+}
+
+@media screen and (max-width: 365px) {
+     .search-engine-wrapper > .search-engine-logo > h1 {
+          font-size: 90px;
+     }
+}
+
+.search-engine-wrapper > .search-engine-form {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     max-width: 540px;
+     width: 100%;
+     box-sizing: border-box;
+     padding: 0 15px;
+}
+
+@media screen and (min-width: 1215px) {
+     .search-engine-wrapper > .search-engine-form {
+          max-width: 640px;
+     }
+}
+
+.search-engine-form > form {
+     width: 100%;
+}
+
+.search-engine-form > form > input {
+     outline: none;
+     border: 3px solid var(--sugle-color-4);
+     border-radius: 0px;
+     margin: 0;
+     box-sizing: border-box;
+     padding: 0 5px;
+     height: 42px;
+     width: 100%;
+     font-size: 14px;
+     font-family: 'Fira Sans', sans-serif;
+     transition: 120ms all ease-in-out;
+     background: rgba(255, 255, 255, 0.9);
+}
+
+@media screen and (min-width: 1215px) {
+     .search-engine-form > form > input {
+          height: 52px;
+          font-size: 16px;
+          border: 4px solid var(--sugle-color-4);
+     }
+}
+
+@media screen and (max-width: 365px) {
+     .search-engine-form > form > input {
+          height: 38px;
+          border: 2px solid var(--sugle-color-4);
+          font-size: 13.5px;
+     }
+}
+
+.search-engine-form > form > input:focus, .search-engine-form > form > input:hover {
+     border-color: var(--sugle-color-5);
+}
+
+.search-engine-form > ul.links {
+     list-style-type: none;
+     padding: 0;
+     margin: 0;
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+     height: 65px;
+     width: 100%;
+}
+
+.search-engine-form > ul.links > li > a {
+     color: var(--sugle-color-4);
+     font-size: 21px;
+     transition: 90ms all ease-in-out;
+}
+
+.search-engine-form > ul.links > li > a:hover {
+     color: var(--sugle-color-5);
+}
+
+/* container */
+
+.container {
+     max-width: 1200px;
+     margin: 0 auto;
+}
+
+@media screen and (max-width: 1215px) {
+     .container {
+          box-sizing: border-box;
+          padding: 0 15px;
+     }
+}
+
+
+/* navigation */
+
+nav#sitenav {
+     border-bottom: 3px solid #ecebec;
+     height: 65px;
+}
+
+@media screen and (max-width: 610px) {
+     nav#sitenav {
+          height: auto;
+          padding: 5px 0 20px 0;
+     }
+}
+
+nav#sitenav > .container {
+     height: 100%;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+
+@media screen and (max-width: 610px) {
+     nav#sitenav > .container {
+          flex-direction: column;
+          justify-content: flex-start;
+     }
+}
+
+nav#sitenav > .container > a {
+     font-family: 'Shrikhand', sans-serif;
+     text-decoration: none;
+     margin: 0;
+     font-size: 32px;
+     color: var(--sugle-color-5);
+}
+
+nav#sitenav > .container > form {
+     max-width: 380px;
+     width: 100%;
+}
+
+@media screen and (max-width: 610px) {
+     nav#sitenav > .container > form {
+          max-width: 100%;
+          margin-top: 15px;
+     }
+
+     nav#sitenav > .container > a {
+          font-size: 36px;
+     }
+}
+
+nav#sitenav > .container > form > input {
+     outline: none;
+     border: 3px solid var(--sugle-color-5);
+     border-radius: 0px;
+     margin: 0;
+     box-sizing: border-box;
+     padding: 0 5px;
+     height: 42px;
+     width: 100%;
+     font-size: 14px;
+     font-family: 'Fira Sans', sans-serif;
+     transition: 120ms all ease-in-out;
+     background: rgba(255, 255, 255, 0.9);
+}
+
+nav#sitenav > .container > form > input:focus {
+     border-color: var(--sugle-color-2);
+}
+
+/* suggle database results */
